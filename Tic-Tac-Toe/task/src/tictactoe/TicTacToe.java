@@ -1,12 +1,16 @@
 package tictactoe;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class TicTacToe extends JFrame {
-    public TicTacToe() {
+    {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(300, 300);
+        add(new Board(), BorderLayout.CENTER);
+        setSize(450, 450);
+        setBackground(Color.WHITE);
+        setTitle("Tic Tac Toe");
+        setResizable(false);
         setVisible(true);
-        setLayout(null);
     }
 }
