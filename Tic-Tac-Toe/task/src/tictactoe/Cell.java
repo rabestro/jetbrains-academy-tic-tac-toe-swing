@@ -1,10 +1,12 @@
 package tictactoe;
 
-import javax.swing.JButton;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 class Cell extends JButton {
+    private static final Font COMIC_SANS = new Font("Comic Sans", Font.BOLD, 50);
+
     Cell(final String name, final ActionListener listener) {
         super(Mark.EMPTY.getMark());
         addActionListener(listener);
@@ -14,8 +16,6 @@ class Cell extends JButton {
         setVisible(true);
         setEnabled(false);
     }
-
-    private static final Font COMIC_SANS = new Font("Comic Sans", Font.BOLD, 50);
 
     int getIndex() {
         final var notation = this.getName().substring(6);
@@ -37,7 +37,7 @@ class Cell extends JButton {
     public enum Mark {
         EMPTY(" "), X("X"), O("O");
 
-        private String mark;
+        private final String mark;
 
         Mark(String mark) {
             this.mark = mark;

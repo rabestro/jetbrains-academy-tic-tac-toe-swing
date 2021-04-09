@@ -1,10 +1,7 @@
 package tictactoe;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JMenuItem;
-import java.awt.BorderLayout;
-import java.awt.Color;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Timer;
@@ -90,7 +87,7 @@ public class TicTacToe extends JFrame implements ActionListener {
 
     private void move(final Cell cell) {
         cell.setMark(currentPlayer == 0 ? Cell.Mark.X : Cell.Mark.O);
-        if (board.getGameState() != Board.State.PLAYING) {
+        if (board.getGameState() != State.PLAYING) {
             board.setPlaying(false);
         } else {
             currentPlayer = 1 - currentPlayer;
@@ -103,7 +100,7 @@ public class TicTacToe extends JFrame implements ActionListener {
 
     public void start() {
         toolbar.startGame();
-        statusBar.setMessage(Board.State.PLAYING, currentPlayer(), Cell.Mark.X.getMark());
+        statusBar.setMessage(State.PLAYING, currentPlayer(), Cell.Mark.X.getMark());
         board.setPlaying(true);
         robotTimer = new Timer("Robot", true);
         checkRobot();
@@ -133,7 +130,7 @@ public class TicTacToe extends JFrame implements ActionListener {
         board.clear();
         currentPlayer = 0;
         toolbar.resetGame();
-        statusBar.setMessage(Board.State.EMPTY);
+        statusBar.setMessage(State.EMPTY);
         board.setPlaying(false);
     }
 }

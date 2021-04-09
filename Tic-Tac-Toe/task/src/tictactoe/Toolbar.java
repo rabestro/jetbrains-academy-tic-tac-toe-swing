@@ -1,9 +1,7 @@
 package tictactoe;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class Toolbar extends JPanel {

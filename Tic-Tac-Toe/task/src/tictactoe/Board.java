@@ -1,19 +1,16 @@
 package tictactoe;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import java.awt.Color;
-import java.awt.GridLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class Board extends JPanel  {
+public class Board extends JPanel {
     private static final int[][] TRIPS = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8},
             {0, 4, 8}, {2, 4, 6}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}};
     private final List<Cell> cells;
@@ -33,11 +30,6 @@ public class Board extends JPanel  {
 
     void clear() {
         cells.forEach(Cell::clear);
-    }
-
-    void setPlaying(final boolean isPlaying) {
-        cells.forEach(cell -> cell.setEnabled(isPlaying));
-
     }
 
     public State getGameState() {
@@ -78,6 +70,11 @@ public class Board extends JPanel  {
         return state == State.EMPTY || state == State.PLAYING;
     }
 
+    void setPlaying(final boolean isPlaying) {
+        cells.forEach(cell -> cell.setEnabled(isPlaying));
+
+    }
+
     public Cell getRandomFreeCell() {
         final var freeCells = cells.stream()
                 .filter(cell -> cell.getText().equals(Cell.Mark.EMPTY.getMark()))
@@ -86,21 +83,4 @@ public class Board extends JPanel  {
         return freeCells.get(0);
     }
 
-    public enum State {
-        EMPTY("Game is not started"),
-        PLAYING("The turn of {0} Player ({1})"),
-        DRAW("Draw"),
-        X_WINS("The {0} Player (X) wins"),
-        O_WINS("The {0} Player (O) wins");
-
-        final String message;
-
-        State(String message) {
-            this.message = message;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-    }
 }
