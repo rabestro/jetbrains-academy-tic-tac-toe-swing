@@ -42,7 +42,7 @@ public class Board extends JPanel  {
 
     public State getGameState() {
         if (isEmpty()) {
-            return State.NOT_STARTED;
+            return State.EMPTY;
         }
         if (hasTrips(Cell.Mark.X)) {
             return State.X_WINS;
@@ -64,10 +64,6 @@ public class Board extends JPanel  {
         return cells.stream().map(JButton::getText).noneMatch(String::isBlank);
     }
 
-    private boolean isEmpty(final int index) {
-        return cells.get(index).getText().isBlank();
-    }
-
     private boolean hasTrips(Cell.Mark mark) {
         Predicate<int[]> threeInRow = line -> Arrays.stream(line)
                 .mapToObj(cells::get)
@@ -79,11 +75,7 @@ public class Board extends JPanel  {
 
     public boolean isPlaying() {
         final var state = getGameState();
-        return state == State.NOT_STARTED || state == State.PLAYING;
-    }
-
-    public int[] getFreeCells() {
-        return IntStream.range(0, 9).filter(this::isEmpty).toArray();
+        return state == State.EMPTY || state == State.PLAYING;
     }
 
     public Cell getRandomFreeCell() {
@@ -95,11 +87,11 @@ public class Board extends JPanel  {
     }
 
     public enum State {
-        NOT_STARTED("Game is not started"),
-        PLAYING("Game in progress"),
+        EMPTY("Game is not started"),
+        PLAYING("The turn of {0} Player ({1})"),
         DRAW("Draw"),
-        X_WINS("X wins"),
-        O_WINS("O wins");
+        X_WINS("The {0} Player (X) wins"),
+        O_WINS("The {0} Player (O) wins");
 
         final String message;
 
